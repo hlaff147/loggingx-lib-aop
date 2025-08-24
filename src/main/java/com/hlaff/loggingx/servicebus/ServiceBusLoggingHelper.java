@@ -32,7 +32,7 @@ public class ServiceBusLoggingHelper {
         try {
             structuredLogger.info(event -> {
                 event.component("servicebus-producer")
-                     .topic(sender.getEntityName())
+                     .topic(sender.getEntityPath())
                      .put("messageId", message.getMessageId())
                      .put("correlationId", message.getCorrelationId());
 
