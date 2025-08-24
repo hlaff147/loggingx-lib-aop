@@ -82,18 +82,34 @@
 			<optional>true</optional>
 		</dependency>
 
-		<!-- (Opcional) Mongo command listener -->
-		<dependency>
-			<groupId>org.mongodb</groupId>
-			<artifactId>mongodb-driver-core</artifactId>
-			<version>5.1.2</version>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-mongodb</artifactId>
-			<optional>true</optional>
-		</dependency>
+                <!-- (Opcional) Mongo command listener -->
+                <dependency>
+                        <groupId>org.mongodb</groupId>
+                        <artifactId>mongodb-driver-core</artifactId>
+                        <version>5.1.2</version>
+                        <optional>true</optional>
+                </dependency>
+                <dependency>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-data-mongodb</artifactId>
+                        <optional>true</optional>
+                </dependency>
+
+                <!-- (Opcional) Azure Service Bus -->
+                <dependency>
+                        <groupId>com.azure</groupId>
+                        <artifactId>azure-messaging-servicebus</artifactId>
+                        <version>7.15.0</version>
+                        <optional>true</optional>
+                </dependency>
+
+                <!-- (Opcional) JDBC DataSource proxy -->
+                <dependency>
+                        <groupId>net.ttddyy</groupId>
+                        <artifactId>datasource-proxy</artifactId>
+                        <version>1.9</version>
+                        <optional>true</optional>
+                </dependency>
 
 		<!-- (Opcional) Encoder JSON logback -->
 		<dependency>

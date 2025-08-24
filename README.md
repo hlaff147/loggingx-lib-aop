@@ -9,10 +9,10 @@
 ## 🚀 Características Principais
 
 - **Logs Estruturados JSON**: Todos os logs são emitidos em formato JSON para fácil ingestão em plataformas de observabilidade
-- **Correlação Ponta-a-Ponta**: Propagação automática de `correlationId` através de HTTP, Kafka, MongoDB e outros
+- **Correlação Ponta-a-Ponta**: Propagação automática de `correlationId` através de HTTP, Kafka, MongoDB, JDBC, Service Bus e outros
 - **AOP Automático**: Logging transparente com anotações `@Loggable` e `@BusinessEvent`
 - **Redação de PII**: Mascaramento automático de dados sensíveis baseado em configuração
-- **Conectores Plug-and-Play**: Suporte automático para HTTP, Kafka, MongoDB conforme dependências no classpath
+- **Conectores Plug-and-Play**: Suporte automático para HTTP, Kafka, MongoDB, JDBC e Azure Service Bus conforme dependências no classpath
 - **Performance**: Overhead <2% CPU com sampling inteligente e appenders assíncronos
 
 ## 📦 Instalação
@@ -72,6 +72,17 @@ loggingx:
     enabled: true
     slow-queries-only: true
     slow-threshold-ms: 1000
+
+  # Configurações Azure Service Bus
+  servicebus:
+    enabled: true
+    log-payload: false
+
+  # Configurações JDBC
+  jdbc:
+    enabled: false
+    slow-queries-only: true
+    slow-threshold-ms: 500
 ```
 
 ## 📝 Uso Básico
