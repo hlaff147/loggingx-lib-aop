@@ -182,6 +182,20 @@ public class LoggingXAutoConfiguration {
     }
 
     // ========================================
+    // CONECTORES AZURE SERVICE BUS
+    // ========================================
+
+    @Bean
+    @ConditionalOnClass(com.azure.messaging.servicebus.ServiceBusClientBuilder.class)
+    @ConditionalOnProperty(prefix = "loggingx.servicebus", name = "enabled", havingValue = "true", matchIfMissing = true)
+    @ConditionalOnMissingBean
+    public com.hlaff.loggingx.servicebus.ServiceBusLoggingHelper serviceBusLoggingHelper(StructuredLogger structuredLogger,
+                                                                                         LoggingXProperties properties) {
+        log.info("Configurando LoggingX ServiceBusLoggingHelper");
+        return new com.hlaff.loggingx.servicebus.ServiceBusLoggingHelper(structuredLogger, properties);
+    }
+
+    // ========================================
     // CONECTORES MONGODB
     // ========================================
 
@@ -196,6 +210,28 @@ public class LoggingXAutoConfiguration {
     }
 
     // ========================================
+    // CONECTORES JDBC
+    // ========================================
+
+    @Bean
+    @ConditionalOnClass(net.ttddyy.dsproxy.support.ProxyDataSourceBuilder.class)
+    @ConditionalOnProperty(prefix = "loggingx.jdbc", name = "enabled", havingValue = "true")
+    @ConditionalOnMissingBean
+    public com.hlaff.loggingx.jdbc.LoggingQueryExecutionListener loggingQueryExecutionListener(StructuredLogger structuredLogger,
+                                                                                              LoggingXProperties properties) {
+        log.info("Configurando LoggingX LoggingQueryExecutionListener");
+        return new com.hlaff.loggingx.jdbc.LoggingQueryExecutionListener(structuredLogger, properties);
+    }
+
+    @Bean
+    @ConditionalOnClass(net.ttddyy.dsproxy.support.ProxyDataSourceBuilder.class)
+    @ConditionalOnProperty(prefix = "loggingx.jdbc", name = "enabled", havingValue = "true")
+    public com.hlaff.loggingx.jdbc.LoggingDataSourceProxyBeanPostProcessor loggingDataSourceProxyBeanPostProcessor(com.hlaff.loggingx.jdbc.LoggingQueryExecutionListener listener) {
+        log.info("Configurando LoggingX LoggingDataSourceProxyBeanPostProcessor");
+        return new com.hlaff.loggingx.jdbc.LoggingDataSourceProxyBeanPostProcessor(listener);
+    }
+
+    // ========================================
     // INFORMAÇÕES DE INICIALIZAÇÃO
     // ========================================
 
@@ -207,7 +243,9 @@ public class LoggingXAutoConfiguration {
         log.info("   Versão: {}", properties.getVersion());
         log.info("   HTTP habilitado: {}", properties.getHttp().isEnabled());
         log.info("   Kafka habilitado: {}", properties.getKafka().isEnabled());
+        log.info("   ServiceBus habilitado: {}", properties.getServicebus().isEnabled());
         log.info("   MongoDB habilitado: {}", properties.getMongo().isEnabled());
+        log.info("   JDBC habilitado: {}", properties.getJdbc().isEnabled());
         log.info("   Chaves para mascaramento: {}", properties.getRedactKeys().size());
         log.info("========================================");
     }

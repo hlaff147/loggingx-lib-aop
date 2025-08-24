@@ -62,6 +62,11 @@ public class LoggingXProperties {
     private KafkaSection kafka = new KafkaSection();
 
     /**
+     * Configurações específicas para Azure Service Bus
+     */
+    private ServiceBusSection servicebus = new ServiceBusSection();
+
+    /**
      * Configurações específicas para MongoDB
      */
     private MongoSection mongo = new MongoSection();
@@ -162,6 +167,37 @@ public class LoggingXProperties {
          * Se deve logar headers das mensagens
          */
         private boolean logHeaders = true;
+    }
+
+    /**
+     * Configurações para Azure Service Bus
+     */
+    @Data
+    public static class ServiceBusSection {
+        /**
+         * Se o conector Service Bus está habilitado
+         */
+        private boolean enabled = true;
+
+        /**
+         * Se deve logar envio de mensagens
+         */
+        private boolean logProducer = true;
+
+        /**
+         * Se deve logar recebimento de mensagens
+         */
+        private boolean logConsumer = true;
+
+        /**
+         * Se deve logar payload das mensagens
+         */
+        private boolean logPayload = false;
+
+        /**
+         * Se deve logar application properties das mensagens
+         */
+        private boolean logApplicationProperties = true;
     }
 
     /**
